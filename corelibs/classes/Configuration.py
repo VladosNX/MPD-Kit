@@ -14,6 +14,7 @@ class Configuration:
         ValueSignature('VERSION', 'Version', False, True),
         ValueSignature('BRIEF', 'Description', False, True),
         ValueSignature('ENTRY', 'Entry File', True, True),
+        ValueSignature('BASEFLAGS', 'Base Compiler Flags', False, False),
     ]
 
     def getValueSignature(self, key: str):
@@ -29,6 +30,15 @@ class Configuration:
                 return value[ARG_VALUE]
 
         return None
+
+    def getRecurringValues(self, key):
+        result = []
+
+        for item in self.values:
+            if item[ARG_KEY] == key:
+                result.append(item[ARG_VALUE])
+
+        return result
 
     def setValue(self, key: str, value: str):
         signature = self.getValueSignature(key)

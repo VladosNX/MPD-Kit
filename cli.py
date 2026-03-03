@@ -19,7 +19,7 @@ if arguments['help']:
     print("")
     print("Available modes:")
     print("")
-    print("classic: Start compiling process with default configuration")
+    print("letsgo: Start compiling process with default configuration")
     print("validate: Check is your config file correct and show information about this project")
     print("")
     print("If you have some problems with MPD-CLI, please consider creating an issue on GitHub:")
@@ -33,3 +33,9 @@ project = Project('.')
 if arguments['mode'] == 'validate':
     for item in project.config.values:
         print(f"{project.config.getValueSignature(item[0]).pretty_name}: {item[1]}")
+elif arguments['mode'] == 'letsgo':
+    project.build(
+        lambda category, info: print(f"{category}: {info}"),
+        lambda step, title: print(f"Step {step} - {title}"),
+        arguments
+    )

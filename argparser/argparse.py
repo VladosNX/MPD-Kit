@@ -4,7 +4,7 @@ import argparser.argconditions as argconditions
 
 # Input dictionary has information about all available options.
 # Options are stored in order like:
-#  [ type: int, id: str, required: bool|function, long: str|None, short: str|None, has_value: bool, order: int|None ]
+#  [ type: int, id: str, required: bool|function, short: str|None, has_value: bool, order: int|None ]
 # If you specified a function to 'required' field, it will be executed after arguments parsing is done to check if argument should be required based on context
 # long and short options aren't required if you didn't set type to '1'
 # order is used for ordinal arguments
@@ -12,7 +12,8 @@ import argparser.argconditions as argconditions
 inputs = [
     [ argvars.TYPE_ORDINAL, 'mode', argconditions.isModeRequired, None, True, 0 ],
     [ argvars.TYPE_DOUBLEDASH, 'help', False, None, False, None ],
-    [ argvars.TYPE_DOUBLEDASH, 'verbose', False, 'v', False, None ]
+    [ argvars.TYPE_DOUBLEDASH, 'verbose', False, 'v', False, None ],
+    [ argvars.TYPE_DOUBLEDASH, 'pythoncmd', False, 'p', True, None ]
 ]
 
 def _findByDoubleDash(value: str):

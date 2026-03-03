@@ -1,0 +1,1 @@
+class SystemCommandFailed(Exception): pass
