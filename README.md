@@ -2,6 +2,8 @@
 
 Welcome to MPD-Kit official repository!
 
+MPD stands for "Multi-Platform Development" and solves a lot of problems that can happen while you're compiling your application.
+
 This program is on development stage right now. If you want to support development, please give this project a star :)
 
 ## Quick overview
