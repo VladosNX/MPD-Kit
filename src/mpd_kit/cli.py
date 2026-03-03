@@ -1,6 +1,6 @@
-import vars
+import mpd_kit.vars as vars
 import sys
-import argparser.argparse as argparse
+import mpd_kit.argparser.argparse as argparse
 from mpd_kit.classes.Project import Project
 from mpd_kit.classes.BuildArguments import BuildArguments
 

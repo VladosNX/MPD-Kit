@@ -1,6 +1,6 @@
 import sys
-import argparser.argvars as argvars
-import argparser.argconditions as argconditions
+import mpd_kit.argparser.argvars as argvars
+import mpd_kit.argparser.argconditions as argconditions
 
 # Input dictionary has information about all available options.
 # Options are stored in order like:
