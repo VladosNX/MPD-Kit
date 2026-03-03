@@ -5,5 +5,10 @@ setup(
     name="mpd_kit",
     version=VERSION,
     packages=find_packages(where='src'),
-    package_dir={'': 'src'}
+    package_dir={'': 'src'},
+    entry_points={
+        "console_scripts": [
+            "mpd-cli=mpd_kit.cli:main"
+        ]
+    }
 )
