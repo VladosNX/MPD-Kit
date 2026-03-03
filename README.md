@@ -15,6 +15,11 @@ After installation is done, builder starts the `pyinstaller` command for files t
 
 The latest step is copying binary files from cache to `dist` - and process is done!
 
+## About MPD-Clicks
+
+MPD-Clicks is the GUI application that allows you to use the same functions as from MPD-CLI with more intuitive way than MPD-CLI.
+You can look at this project at https://github.com/VladosNX/MPD-Clicks
+
 ## Future features
 
 ### 1. Cross-compiling
