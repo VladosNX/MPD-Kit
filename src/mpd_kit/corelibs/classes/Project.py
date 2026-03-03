@@ -1,8 +1,8 @@
-from corelibs.classes.Configuration import Configuration
-from corelibs.classes.exceptions.SystemCommandFailed import SystemCommandFailed
-import corelibs.configparse.parser as configparser
-import corelibs.build_functions as build_functions
-import vars
+from mpd_kit.corelibs.classes.Configuration import Configuration
+from mpd_kit.corelibs.classes.exceptions.SystemCommandFailed import SystemCommandFailed
+import mpd_kit.corelibs.configparse.parser as configparser
+import mpd_kit.corelibs.build_functions as build_functions
+import mpd_kit.vars as vars
 import os
 import shutil
 

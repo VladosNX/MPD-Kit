@@ -1,7 +1,7 @@
 import vars
 import sys
 import argparser.argparse as argparse
-from corelibs.classes.Project import Project
+from mpd_kit.corelibs.classes.Project import Project
 
 arguments = argparse.parse(sys.argv)
 

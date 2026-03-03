@@ -1,4 +1,6 @@
 .idea
 __pycache__
 mpd-dist
+mpd-files
+mpd-venv
 dist

@@ -1,5 +1,5 @@
 import os
-from corelibs.classes.exceptions.SystemCommandFailed import SystemCommandFailed
+from mpd_kit.corelibs.classes.exceptions.SystemCommandFailed import SystemCommandFailed
 
 def run_command(command):
     status = os.system(command)

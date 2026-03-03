@@ -1,7 +1,7 @@
-from corelibs.classes.exceptions.SecondNonRecurringValue import SecondNonRecurringValue
-from corelibs.classes.exceptions.UnknownValue import UnknownValue
-from corelibs.classes.exceptions.SkippedRequiredValue import SkipperRequiredValue
-from corelibs.classes.ValueSignature import ValueSignature
+from mpd_kit.corelibs.classes.exceptions.SecondNonRecurringValue import SecondNonRecurringValue
+from mpd_kit.corelibs.classes.exceptions.UnknownValue import UnknownValue
+from mpd_kit.corelibs.classes.exceptions.SkippedRequiredValue import SkipperRequiredValue
+from mpd_kit.corelibs.classes.ValueSignature import ValueSignature
 
 ARG_KEY = 0
 ARG_VALUE = 1
