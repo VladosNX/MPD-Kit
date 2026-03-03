@@ -4,6 +4,22 @@ import argparser.argparse as argparse
 from mpd_kit.classes.Project import Project
 from mpd_kit.classes.BuildArguments import BuildArguments
 
+def show_log(category, info):
+    colors = {
+        'info': 4,
+        'warn': 3,
+        'error': 1,
+        'done': 2,
+        'cmd': 5
+    }
+
+    print(f"[\x1b[3{colors[category]}m{category.ljust(5)}\x1b[0m] {info}")
+
+def show_step(step, title):
+    print(f'+===== STEP {step}')
+    print(f'| {title}')
+    print(f'+===========')
+
 arguments = argparse.parse(sys.argv)
 
 if arguments['help']:
@@ -37,8 +53,4 @@ if arguments['mode'] == 'validate':
 elif arguments['mode'] == 'letsgo':
     build_arguments = BuildArguments()
     build_arguments.python_cmd = arguments['pythoncmd']
-    project.build(
-        lambda category, info: print(f"{category}: {info}"),
-        lambda step, title: print(f"Step {step} - {title}"),
-        build_arguments
-    )
+    project.build(show_log, show_step, build_arguments)
