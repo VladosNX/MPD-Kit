@@ -1,4 +1,4 @@
-from mpd_kit.corelibs.classes.exceptions.SystemCommandFailed import SystemCommandFailed
+from mpd_kit.classes.exceptions.SystemCommandFailed import SystemCommandFailed
 import os
 import shutil
 

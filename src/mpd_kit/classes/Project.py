@@ -1,6 +1,6 @@
-from mpd_kit.corelibs.classes.Configuration import Configuration
-from mpd_kit.corelibs.classes.exceptions.SystemCommandFailed import SystemCommandFailed
-from mpd_kit.corelibs.classes.BuildArguments import BuildArguments
+from mpd_kit.classes.Configuration import Configuration
+from mpd_kit.classes.exceptions.SystemCommandFailed import SystemCommandFailed
+from mpd_kit.classes.BuildArguments import BuildArguments
 import mpd_kit.corelibs.configparse.parser as configparser
 import mpd_kit.corelibs.build_functions as build_functions
 import mpd_kit.vars as vars
@@ -8,7 +8,7 @@ import os
 import shutil
 
 class Project:
-    path = '.'
+    path = ''
     config = Configuration()
 
     def __init__(self, path):

@@ -1,6 +1,6 @@
 import os
 import sys
-from mpd_kit.corelibs.classes.Configuration import Configuration
+from mpd_kit.classes.Configuration import Configuration
 
 def parse_config(project='.'):
     dotmpd_file = f'{project}/DOTMPD'
