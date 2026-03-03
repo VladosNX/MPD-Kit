@@ -1,0 +1,1 @@
+class SkipperRequiredValue(Exception): pass

@@ -1,6 +1,7 @@
 import vars
 import sys
 import argparser.argparse as argparse
+from corelibs.classes.Project import Project
 
 arguments = argparse.parse(sys.argv)
 
@@ -26,3 +27,9 @@ if arguments['help']:
     print("or consider using MPD-Clicks instead if you prefer GUI:")
     print("  https://github.com/VladosNX/MPD-Clicks")
     sys.exit()
+
+project = Project('.')
+
+if arguments['mode'] == 'validate':
+    for item in project.config.values:
+        print(f"{project.config.getValueSignature(item[0]).pretty_name}: {item[1]}")

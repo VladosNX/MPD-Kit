@@ -1,0 +1,1 @@
+class SecondNonRecurringValue(Exception): pass
