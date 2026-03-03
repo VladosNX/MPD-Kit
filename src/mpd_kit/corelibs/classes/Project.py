@@ -1,5 +1,6 @@
 from mpd_kit.corelibs.classes.Configuration import Configuration
 from mpd_kit.corelibs.classes.exceptions.SystemCommandFailed import SystemCommandFailed
+from mpd_kit.corelibs.classes.BuildArguments import BuildArguments
 import mpd_kit.corelibs.configparse.parser as configparser
 import mpd_kit.corelibs.build_functions as build_functions
 import mpd_kit.vars as vars
@@ -15,11 +16,11 @@ class Project:
 
         config = configparser.parse_config(self.path)
 
-    def build(self, log, next_step, arguments):
+    def build(self, log, next_step, arguments: BuildArguments):
         # progress_funcs should accept 2 arguments - category and info
         # category is a type of information - info, warn, done, error, cmd
         log('info', f'Running MPD-Kit {vars.VERSION}, task: letsgo')
-        python_cmd = 'python3' if arguments['pythoncmd'] == None else arguments['pythoncmd']
+        python_cmd = 'python3' if arguments.python_cmd is None else arguments.python_cmd
         venv_path = 'mpd-venv'
         log('info', f'Using {python_cmd} as Python executable')
         log('info', f'Using {venv_path} as Python virtual environment')
@@ -63,7 +64,7 @@ class Project:
         # Step 3: Compiling
         next_step(3, 'Compiling')
         builddir = os.path.join(os.path.abspath(self.path), 'mpd-files')
-        os.mkdir(builddir)
+        build_functions.recreate_dir(builddir)
         log('done', f'Created directory "{builddir}"')
 
         entries = self.config.getRecurringValues('ENTRY')
@@ -84,6 +85,7 @@ class Project:
         next_step(4, 'Copying and cleaning')
         result_dir = os.path.join(os.path.abspath(self.path), 'mpd-dist')
         log('info', f'Copying dist directory to {result_dir}')
+        build_functions.clear_dir(result_dir)
         shutil.copytree(f'{builddir}/dist', result_dir)
         log('done', f'dist directory copied')
 

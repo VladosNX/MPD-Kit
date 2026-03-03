@@ -4,3 +4,4 @@ mpd-dist
 mpd-files
 mpd-venv
 dist
+src/mpd_kit.egg-info/

@@ -2,6 +2,7 @@ import vars
 import sys
 import argparser.argparse as argparse
 from mpd_kit.corelibs.classes.Project import Project
+from mpd_kit.corelibs.classes.BuildArguments import BuildArguments
 
 arguments = argparse.parse(sys.argv)
 
@@ -34,8 +35,10 @@ if arguments['mode'] == 'validate':
     for item in project.config.values:
         print(f"{project.config.getValueSignature(item[0]).pretty_name}: {item[1]}")
 elif arguments['mode'] == 'letsgo':
+    build_arguments = BuildArguments()
+    build_arguments.python_cmd = arguments['pythoncmd']
     project.build(
         lambda category, info: print(f"{category}: {info}"),
         lambda step, title: print(f"Step {step} - {title}"),
-        arguments
+        build_arguments
     )
