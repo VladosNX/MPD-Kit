@@ -24,10 +24,6 @@ def parse_config(project='.'):
         if line[0] == '#': continue
 
         key, value = line.split('>')
-        try:
-            result.setValue(key, value)
-        except UnknownValue as e:
-            print(f'Unknown config value {e}', file=sys.stderr)
-            sys.exit(1)
+        result.setValue(key, value)
 
     result.validateRequired()
