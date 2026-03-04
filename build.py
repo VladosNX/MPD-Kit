@@ -5,6 +5,6 @@ import shutil
 
 if os.path.exists('dist'): shutil.rmtree('dist')
 
-if not os.system('python3 setup.py sdist bdist_wheel --dry-run --verbose') == 0: sys.exit(1)
+if not os.system(f'python setup.py sdist bdist_wheel') == 0: sys.exit(1)
 if os.path.exists('src/mpd_kit.egg-info'): shutil.rmtree('src/mpd_kit.egg-info')
 shutil.rmtree('build')
