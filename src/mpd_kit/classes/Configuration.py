@@ -10,7 +10,7 @@ class Configuration:
     values = []
 
     value_signatures = [
-        ValueSignature('PRETTY', 'Pretty Name', False, True),
+        ValueSignature('DNAME', 'Display Name', False, True),
         ValueSignature('VERSION', 'Version', False, True),
         ValueSignature('BRIEF', 'Description', False, True),
         ValueSignature('ENTRY', 'Entry File', True, True),
@@ -43,12 +43,12 @@ class Configuration:
     def setValue(self, key: str, value: str):
         signature = self.getValueSignature(key)
 
+        if not signature:
+            raise UnknownValue(key)
+
         if not signature.recurring:
             if self.getValue(key):
                 raise SecondNonRecurringValue(key)
-
-        if not signature:
-            raise UnknownValue(key)
 
         self.values.append([key, value])
 

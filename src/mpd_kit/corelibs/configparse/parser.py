@@ -1,6 +1,7 @@
 import os
 import sys
 from mpd_kit.classes.Configuration import Configuration
+from mpd_kit.classes.exceptions.UnknownValue import UnknownValue
 
 def parse_config(project='.'):
     dotmpd_file = f'{project}/DOTMPD'
@@ -25,6 +26,10 @@ def parse_config(project='.'):
         if line[0] == '#': continue
 
         key, value = line.split('>')
-        result.setValue(key, value)
+        try:
+            result.setValue(key, value)
+        except UnknownValue as e:
+            print(f'Unknown config value {e}', file=sys.stderr)
+            sys.exit(1)
 
     result.validateRequired()
