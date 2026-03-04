@@ -2,12 +2,12 @@ import os
 import sys
 from mpd_kit.classes.Configuration import Configuration
 from mpd_kit.classes.exceptions.UnknownValue import UnknownValue
+from mpd_kit.classes.exceptions.NoConfigFile import NoConfigFile
 
 def parse_config(project='.'):
     dotmpd_file = f'{project}/DOTMPD'
     if not os.path.exists(dotmpd_file):
-        print('There is no DOTMPD file in your project.', file=sys.stderr)
-        sys.exit(1)
+        raise NoConfigFile()
 
     file = open(dotmpd_file, mode='r', encoding='utf-8')
     content = file.read()
@@ -15,9 +15,7 @@ def parse_config(project='.'):
 
     lines = content.split('\n')
     if len(lines) < 1 or lines[0] != 'DOTMPD1':
-        print('Your DOTMPD file beginning is incorrect.', file=sys.stderr)
-        sys.exit(1)
-        # TODO: call exception instead of quitting program
+        raise NoConfigFile()
 
     result = Configuration()
     for line_raw in lines[1:]:

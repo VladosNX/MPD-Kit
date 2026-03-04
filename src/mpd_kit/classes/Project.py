@@ -55,9 +55,10 @@ class Project:
         # Step 2: Installing libraries
         if create_venv:
             next_step(2, 'Installing libraries')
-            if os.path.exists(f'{os.path.abspath(self.path)}/requirements.txt'):
+            requirements_file = f'{os.path.abspath(self.path)}/requirements.txt'
+            if os.path.exists(requirements_file):
                 try:
-                    build_functions.run_command('pip install -r requirements.txt')
+                    build_functions.run_command(f'pip install -r {requirements_file}')
                 except SystemCommandFailed:
                     log('error', 'Failed to install libraries from requirements.txt')
                     return False

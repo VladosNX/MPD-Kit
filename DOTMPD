@@ -1,7 +1,7 @@
 DOTMPD1
 
 DNAME>MPD-Kit
-VERSION>0.1
+VERSION>0.1.1
 BRIEF>Useful tool for projects building automatization
 
 ENTRY>src/mpd_kit/cli.py

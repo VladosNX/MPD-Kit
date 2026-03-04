@@ -1,0 +1,1 @@
+class NoConfigFile(Exception): pass
