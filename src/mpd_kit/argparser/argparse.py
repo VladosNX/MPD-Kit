@@ -12,8 +12,10 @@ import mpd_kit.argparser.argconditions as argconditions
 inputs = [
     [ argvars.TYPE_ORDINAL, 'mode', argconditions.isModeRequired, None, True, 0 ],
     [ argvars.TYPE_DOUBLEDASH, 'help', False, None, False, None ],
-    [ argvars.TYPE_DOUBLEDASH, 'verbose', False, 'v', False, None ],
-    [ argvars.TYPE_DOUBLEDASH, 'pythoncmd', False, 'p', True, None ]
+    [ argvars.TYPE_DOUBLEDASH, 'verbose', False, None, False, None ],
+    [ argvars.TYPE_DOUBLEDASH, 'pythoncmd', False, 'p', True, None ],
+    [ argvars.TYPE_DOUBLEDASH, 'distdir', False, 'd', True, None ],
+    [ argvars.TYPE_DOUBLEDASH, 'venv', False, 'v', True, None ]
 ]
 
 def _findByDoubleDash(value: str):
@@ -73,7 +75,7 @@ def parse(args):
             ordinalIndex += 1
 
         if not optionSignature:
-            print('Incorrect argument :( See --help', file=sys.stderr)
+            print(f'Incorrect argument {arg} :( See --help', file=sys.stderr)
             sys.exit(1)
         elif optionSignature[argvars.ARG_TYPE] == argvars.TYPE_ORDINAL:
             options[optionSignature[argvars.ARG_ID]] = arg

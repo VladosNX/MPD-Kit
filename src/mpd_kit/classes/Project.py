@@ -6,6 +6,7 @@ import mpd_kit.corelibs.build_functions as build_functions
 import mpd_kit.vars as vars
 import os
 import shutil
+import sys
 
 class Project:
     path = ''
@@ -20,19 +21,29 @@ class Project:
         # progress_funcs should accept 2 arguments - category and info
         # category is a type of information - info, warn, done, error, cmd
         log('info', f'Running MPD-Kit {vars.VERSION}, task: letsgo')
-        python_cmd = 'python3' if arguments.python_cmd is None else arguments.python_cmd
+        
+        python_cmd = arguments.python_cmd
         venv_path = 'mpd-venv'
+        custom_venv = False
+        if arguments.custom_venv:
+            venv_path = arguments.custom_venv
+            custom_venv = True
+        create_venv = not custom_venv or not os.path.exists(venv_path)
+        
         log('info', f'Using {python_cmd} as Python executable')
         log('info', f'Using {venv_path} as Python virtual environment')
 
         # Step 1: Creating virtual environment
-        next_step(1, 'Creating virtual environment')
-        try:
-            build_functions.run_command(f"{python_cmd} -m venv {venv_path}")
-        except SystemCommandFailed:
-            log('error', f'Failed to create a virtual environment')
-            return False
-        log('done', 'Virtual environment created successfully')
+        if create_venv:
+            next_step(1, 'Creating virtual environment')
+            try:
+                build_functions.run_command(f"{python_cmd} -m venv {venv_path}")
+            except SystemCommandFailed:
+                log('error', f'Failed to create a virtual environment')
+                return False
+            log('done', 'Virtual environment created successfully')
+        else:
+            log('warn', f'Using existing {venv_path} instead of creating new virtual environment')
 
         old_path = os.environ['PATH']
         log('info', f'Old PATH: {old_path}')
@@ -42,24 +53,27 @@ class Project:
         log('done', f'Switched to virtual environment')
 
         # Step 2: Installing libraries
-        next_step(2, 'Installing libraries')
-        if os.path.exists(f'{os.path.abspath(self.path)}/requirements.txt'):
+        if create_venv:
+            next_step(2, 'Installing libraries')
+            if os.path.exists(f'{os.path.abspath(self.path)}/requirements.txt'):
+                try:
+                    build_functions.run_command('pip install -r requirements.txt')
+                except SystemCommandFailed:
+                    log('error', 'Failed to install libraries from requirements.txt')
+                    return False
+            else:
+                log('warn', 'There is no requirements.txt, skipping libraries installation')
+
+            log('info', 'Installing pyinstaller')
             try:
-                build_functions.run_command('pip install -r requirements.txt')
+                build_functions.run_command('pip install pyinstaller')
             except SystemCommandFailed:
-                log('error', 'Failed to install libraries from requirements.txt')
+                log('error', 'Failed to install pyinstaller')
                 return False
+
+            log('done', 'All libraries installed successfully')
         else:
-            log('warn', 'There is no requirements.txt, skipping libraries installation')
-
-        log('info', 'Installing pyinstaller')
-        try:
-            build_functions.run_command('pip install pyinstaller')
-        except SystemCommandFailed:
-            log('error', 'Failed to install pyinstaller')
-            return False
-
-        log('done', 'All libraries installed successfully')
+            log('warn', 'Skipping libraries installation because of using ready virtual environment')
 
         # Step 3: Compiling
         next_step(3, 'Compiling')
@@ -83,7 +97,9 @@ class Project:
 
         # Step 4: Copying and cleaning
         next_step(4, 'Copying and cleaning')
-        result_dir = os.path.join(os.path.abspath(self.path), 'mpd-dist')
+        result_dir = arguments.dist_dir
+        if not os.path.isabs(result_dir):
+            result_dir = os.path.join(os.path.abspath(self.path), arguments.dist_dir)
         log('info', f'Copying dist directory to {result_dir}')
         build_functions.clear_dir(result_dir)
         shutil.copytree(f'{builddir}/dist', result_dir)
@@ -91,7 +107,8 @@ class Project:
 
 
         shutil.rmtree(builddir)
-        shutil.rmtree(venv_path)
+        if not custom_venv:
+            shutil.rmtree(venv_path)
 
         log('done', 'Compilation done!')
 
