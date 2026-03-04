@@ -18,5 +18,5 @@ You may also specify your own virtual environment path to skip creating new one 
 
 ## Preparing your project for working with MPD-Kit
 
-All you need to have is `DOTMPD` file in your project. [Read more about it](DOTMPD File.md)
+All you need to have is `DOTMPD` file in your project. [Read more about it](DOTMPD-File.md)
 

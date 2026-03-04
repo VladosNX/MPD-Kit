@@ -6,7 +6,7 @@ MPD stands for "Multi-Platform Development" and solves a lot of problems that ca
 
 This program is on development stage right now. If you want to support development, please give this project a star :)
 
-[Read a documentation here!](docs/MPD-Kit Overview.md)
+[Read a documentation here!](docs/MPD-Kit-Overview.md)
 
 ## Quick overview
 

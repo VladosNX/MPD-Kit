@@ -106,5 +106,5 @@ This is not a MPD-Compatible project (No DOTMPD file)
 
 ## What's next?
 
-If your DOTMPD file is done, you're ready to read next documentation article - [Working with CLI](Working with CLI.md)
+If your DOTMPD file is done, you're ready to read next documentation article - [Working with CLI](Working-with-CLI.md)
 
