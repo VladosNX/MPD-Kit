@@ -27,3 +27,4 @@ def parse_config(project='.'):
         result.setValue(key, value)
 
     result.validateRequired()
+    return result

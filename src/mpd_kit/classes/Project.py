@@ -10,12 +10,12 @@ import sys
 
 class Project:
     path = ''
-    config = Configuration()
+    config = None
 
     def __init__(self, path):
         self.path = path
 
-        config = configparser.parse_config(self.path)
+        self.config = configparser.parse_config(self.path)
 
     def build(self, log, next_step, arguments: BuildArguments):
         # progress_funcs should accept 2 arguments - category and info

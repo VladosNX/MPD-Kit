@@ -7,7 +7,7 @@ ARG_KEY = 0
 ARG_VALUE = 1
 
 class Configuration:
-    values = []
+    # values = []
 
     value_signatures = [
         ValueSignature('DNAME', 'Display Name', False, True),
@@ -16,6 +16,9 @@ class Configuration:
         ValueSignature('ENTRY', 'Entry File', True, True),
         ValueSignature('BASEFLAGS', 'Base Compiler Flags', False, False),
     ]
+
+    def __init__(self):
+        self.values = []
 
     def getValueSignature(self, key: str):
         for item in self.value_signatures:
@@ -47,8 +50,9 @@ class Configuration:
             raise UnknownValue(key)
 
         if not signature.recurring:
-            if self.getValue(key):
-                raise SecondNonRecurringValue(key)
+            current_value = self.getValue(key)
+            if current_value:
+                raise SecondNonRecurringValue(f'{key} is now {current_value}, tried {value}')
 
         self.values.append([key, value])
 
