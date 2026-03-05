@@ -1,1 +1,1 @@
-class SkipperRequiredValue(Exception): pass
+class SkippedRequiredValue(Exception): pass

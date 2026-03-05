@@ -1,6 +1,6 @@
 from mpd_kit.classes.exceptions.SecondNonRecurringValue import SecondNonRecurringValue
 from mpd_kit.classes.exceptions.UnknownValue import UnknownValue
-from mpd_kit.classes.exceptions.SkippedRequiredValue import SkipperRequiredValue
+from mpd_kit.classes.exceptions.SkippedRequiredValue import SkippedRequiredValue
 from mpd_kit.classes.ValueSignature import ValueSignature
 
 ARG_KEY = 0
@@ -59,4 +59,4 @@ class Configuration:
     def validateRequired(self):
         for signature in self.value_signatures:
             if signature.required and not self.getValue(signature.key):
-                raise SkipperRequiredValue(signature.key)
+                raise SkippedRequiredValue(signature.key)
