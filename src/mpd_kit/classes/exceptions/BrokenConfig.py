@@ -1,0 +1,1 @@
+class BrokenConfig(Exception): pass
