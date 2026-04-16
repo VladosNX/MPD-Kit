@@ -8,6 +8,13 @@ This program is on development stage right now. If you want to support developme
 
 [Read a documentation here!](docs/MPD-Kit-Overview.md)
 
+## What is this intended for?
+
+The main purpose of MPD-Kit, that will be real soon is cross-compiling applications. `pyinstaller` can't cross-compile scripts.
+It means that you can't pack your script to .exe if you're using Linux or macOS.
+
+This problem is going to be solved using **virtual machines** - `pyinstaller` will be executed there.
+
 ## Quick overview
 
 MPD-Kit is useful tool to automate compiling Python code with `pyinstaller`. Compilation process looks like using Meson, CMake and tools like these.
@@ -27,10 +34,3 @@ You can look at this project at https://github.com/VladosNX/MPD-Clicks
 First you need to have Python 3 installed on your computer. Go to https://python.org if you don't. Then run a command below:
 
 `pip install mpd-kit`
-
-## Future features
-
-### 1. Cross-compiling
-
-Since `pyinstaller` can't cross-compile applications, MPD-Kit will solve this problem with simple and minimalistic virtual machines.
-Program will copy your project source files into required VM and start cross compilers there and copy files to certain folder.
